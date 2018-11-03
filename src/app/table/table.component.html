@@ -1,16 +1,11 @@
-<table style="width: 80%;">
+<table>
     <tr>
         <th *ngFor="let item of employees?.headers">
             {{item}}
         </th>
     </tr>
-    <tr *ngFor="let emp of employees?.rowData">
-        <!-- <app-row [empData]="emp">
-        </app-row> -->
-        <td>{{emp.id}}</td>
-        <td>{{emp.empId}}</td>
-        <td>{{emp.fName}}</td>
-        <td>{{emp.lName}}</td>
-        <td>{{emp.project}}</td>
+    <tr *ngFor="let emp of employees?.rowData" 
+        app-table-row 
+        [empData]="emp">
     </tr>
 </table>

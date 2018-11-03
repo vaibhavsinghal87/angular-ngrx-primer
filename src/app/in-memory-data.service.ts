@@ -3,7 +3,7 @@ import { InMemoryDbService } from 'angular-in-memory-web-api';
 export class InMemoryDataService implements InMemoryDbService {
   createDb() {
     const employees = {
-      headers: ['Serial No', 'Emp#', 'First Name', 'Last Name', 'Project Name'],
+      headers: ['Serial No', 'Emp#', 'First Name', 'Last Name', 'Project Name', 'Actions'],
       rowData: [
         { id: 1, empId: '1001', fName: 'A', lName: 'B', project: 'Test' },
         { id: 2, empId: '1002', fName: 'A', lName: 'B', project: 'Test' },

@@ -1,0 +1,19 @@
+td {
+    padding: 8px;
+    border: 1px solid #dddddd;
+}
+
+.edit {
+    margin-right: 8px;
+    background-color: #4eb5f1;
+    &:hover {
+        background-color: #4095c6;
+    }
+}
+
+.delete {
+    background-color: #f44336;
+    &:hover {
+        background-color: #b22222;
+    }
+}

@@ -1,0 +1,13 @@
+h1 {
+    background-color: mistyrose;
+}
+
+.add {
+    float: right;
+    margin-bottom: 20px;
+    background-color: #4eb5f1;
+
+    &:hover {
+        background-color: #4095c6;
+    }
+}
