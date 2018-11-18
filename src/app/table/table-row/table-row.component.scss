@@ -1,6 +1,10 @@
 td {
     padding: 8px;
     border: 1px solid #dddddd;
+
+    input {
+        width: 100px;
+    }
 }
 
 .edit {
@@ -12,8 +16,24 @@ td {
 }
 
 .delete {
-    background-color: #f44336;
+    background-color: #dc3545;
     &:hover {
-        background-color: #b22222;
+        background-color: #c82333;
+    }
+}
+
+
+.save {
+    margin-right: 8px;
+    background-color: #40c655;
+    &:hover {
+        background-color: #31b600;
+    }
+}
+
+.cancel {
+    background-color: #fd7e14;
+    &:hover {
+        background-color: #fb5e13;
     }
 }

@@ -1,14 +1,14 @@
-<!-- <td>{{empData.id}}</td>
-<td>{{empData.empId}}</td>
-<td>{{empData.fName}}</td>
-<td>{{empData.lName}}</td>
-<td>{{empData.project}}</td>
- -->
-
 <td *ngFor="let item of empData">
-  {{item}}
+  <span *ngIf="!empData.isEditable">{{ item }}</    span>
+  <input *ngIf="empData.isEditable" type="text" [(ngModel)]="item" />
 </td>
 <td>
-  <button class="btn edit">EDIT</button>
-  <button class="btn delete">DELETE</button>
+  <div *ngIf="!empData.isEditable">
+    <button class="btn edit" (click)="editClickHandler(empData)">EDIT</button>
+    <button class="btn delete" (click)="deleteClickHandler(empData)">DELETE</button>
+  </div>
+  <div *ngIf="empData.isEditable">
+    <button class="btn save" (click)="saveClickHandler()">SAVE</button>
+    <button class="btn cancel" (click)="cancelClickHandler(empData)">CANCEL</button>
+  </div>
 </td>

@@ -24,4 +24,20 @@ export class TableRowComponent implements OnInit {
     return data;
   }
 
+  editClickHandler(item) {
+    item.isEditable = true;
+    console.log(item);
+  }
+
+  deleteClickHandler() {
+  }
+
+  saveClickHandler() {
+  }
+
+  cancelClickHandler(row) {
+    row.isEditable = false;
+    console.log(row);
+  }
+
 }
