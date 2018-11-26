@@ -1,14 +1,57 @@
-<td *ngFor="let item of empData">
-  <span *ngIf="!empData.isEditable">{{ item }}</    span>
-  <input *ngIf="empData.isEditable" type="text" [(ngModel)]="item" />
-</td>
+<ng-container *ngIf="!editMode">
+  <td *ngFor="let key of Object.keys(empData)">
+    <span>{{ empData[key] }}</span>
+  </td>
+</ng-container>
+
+<ng-container *ngIf="editMode">
+  <td *ngFor="let key of Object.keys(selectedRow)">
+    <input type="text" [(ngModel)]="selectedRow[key]" />
+  </td>
+</ng-container>
+
+<!-- <ng-container *ngIf="editMode">
+  <td>
+    <input type="text" [(ngModel)]="selectedRow.fName" />
+  </td>
+</ng-container> -->
+
+<!-- <ng-container *ngTemplateOutlet="editMode ? editTemplate : viewTemplate">
+
+</ng-container>
+<ng-template #viewTemplate>
+  <td *ngFor="let item of empData">
+    <span *ngIf="!editMode">{{ item }}</span>
+  </td>
+</ng-template>
+<ng-template #editTemplate>
+  <td *ngFor="let item of selectedRow">
+    <input *ngIf="editMode" type="text" [(ngModel)]="item" />
+  </td>
+</ng-template> -->
+
+<!-- <ng-container *ngIf="!editMode">
+  <td *ngFor="let item of empData">
+    <span>{{ item }}</span>
+  </td>
+</ng-container>
+<ng-container *ngIf="editMode">
+  <td *ngFor="let item of selectedRow">
+    <input type="text" [(ngModel)]="item" />
+  </td>
+</ng-container> -->
+
+<!-- <input type="text" [(ngModel)]="selectedRow" /> 
+{{selectedRow | json}} -->
+
+
 <td>
-  <div *ngIf="!empData.isEditable">
+  <div *ngIf="!editMode">
     <button class="btn edit" (click)="editClickHandler(empData)">EDIT</button>
     <button class="btn delete" (click)="deleteClickHandler(empData)">DELETE</button>
   </div>
-  <div *ngIf="empData.isEditable">
+  <div *ngIf="editMode">
     <button class="btn save" (click)="saveClickHandler()">SAVE</button>
-    <button class="btn cancel" (click)="cancelClickHandler(empData)">CANCEL</button>
+    <button class="btn cancel" (click)="cancelClickHandler()">CANCEL</button>
   </div>
 </td>

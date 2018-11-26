@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 
+import { DataService } from '../../data.service';
+
 import { Observable } from 'rxjs';
 import { of } from 'rxjs';
 
@@ -10,34 +12,43 @@ import { of } from 'rxjs';
 })
 export class TableRowComponent implements OnInit {
 
+  Object = Object;
+
   @Input() empData: any;
 
-  constructor() { }
+  editMode: boolean = false;
+  selectedRow = null;
+
+  constructor(private dataService: DataService) { }
 
   ngOnInit() {
-    this.empData = this.convertToArray();
+    //this.empData = this.convertToArray();
   }
 
-  convertToArray(): Array<any> {
+  /* convertToArray(): Array<any> {
     let data: Array<any> = [];
     this.empData = Object.keys(this.empData).map(item => data.push(this.empData[item]));
     return data;
-  }
+  } */
 
-  editClickHandler(item) {
-    item.isEditable = true;
-    console.log(item);
+  editClickHandler(row) {
+    this.selectedRow = Object.assign({}, row);
+    this.editMode = true;
   }
 
   deleteClickHandler() {
   }
 
   saveClickHandler() {
+    /* this.dataService.updateEmployee(this.selectedRow).subscribe(data => {
+      console.log(data);
+      this.editMode = false;
+    }); */
   }
 
-  cancelClickHandler(row) {
-    row.isEditable = false;
-    console.log(row);
+  cancelClickHandler() {
+    this.editMode = false;
+    this.selectedRow = null;
   }
 
 }
