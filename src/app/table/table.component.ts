@@ -10,6 +10,7 @@ import { DataService } from '../data.service';
 export class TableComponent implements OnInit {
 
   employees: any;
+  tableData: Array<any> = [];
 
   constructor(private dataService: DataService) { }
 
@@ -17,9 +18,18 @@ export class TableComponent implements OnInit {
     this.dataService.getEmployees()
       .subscribe(data => {
         this.employees = data;
-        console.log(this.employees);
-      }
-    );
+        this.tableData = this.employees.rowData;
+      });
+  }
+
+  saveClicked(row) {
+    this.dataService.updateEmployee(row).subscribe(data => {
+      this.tableData = data;
+    });
+  }
+
+  deleteClicked() {
+    console.log('delete clicked');
   }
 
 }

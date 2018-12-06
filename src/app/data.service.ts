@@ -1,21 +1,41 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
+import { catchError, map } from 'rxjs/operators';
+import { Observable, of, throwError } from 'rxjs';
+
 @Injectable()
 export class DataService {
 
-  private headers = new Headers({ 'Content-Type': 'application/json' });
+  employeeData: Object;
   private employeesUrl = 'api/employees';
 
   constructor(private http: HttpClient) {
   }
 
   getEmployees() {
-    return this.http.get(this.employeesUrl);
+    return this.http.get(this.employeesUrl)
+      .pipe(
+        map(res => {
+          this.employeeData = res;
+          return this.employeeData;
+        })
+      );
   }
 
   updateEmployee(emp) {
-    return this.http.put(this.employeesUrl, emp);
+    let len = this.employeeData.rowData.length;
+    for (let i = 0; i < len; i++) {
+      if (emp.id === this.employeeData.rowData[i].id) {
+        this.employeeData.rowData[i] = emp;
+      }
+    }
+    return of(this.employeeData.rowData);
+    //return this.http.post('commands/resetDb', emp);
+    /* return this.http.put(this.employeesUrl, { id: 1 }, httpOptions).pipe(
+      map(() => console.log('www')),
+      tap(_ => console.log('tap'))
+    ); */
   }
 
   /* 
@@ -40,15 +60,6 @@ export class DataService {
           .post(this.heroesUrl, JSON.stringify({ name: name }), { headers: this.headers })
           .toPromise()
           .then(res => res.json().data as Hero)
-          .catch(this.handleError);
-    }
-  
-    update(hero: any): Promise<Hero> {
-      const url = `${this.heroesUrl}/${hero.id}`;
-      return this.http
-          .put(url, JSON.stringify(hero), { headers: this.headers })
-          .toPromise()
-          .then(() => hero)
           .catch(this.handleError);
     }
   

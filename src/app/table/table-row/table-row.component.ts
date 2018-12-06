@@ -1,9 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output } from '@angular/core';
 
 import { DataService } from '../../data.service';
 
 import { Observable } from 'rxjs';
 import { of } from 'rxjs';
+import { EventEmitter } from '@angular/core';
 
 @Component({
   selector: '[app-table-row]',
@@ -15,6 +16,8 @@ export class TableRowComponent implements OnInit {
   Object = Object;
 
   @Input() empData: any;
+  @Output() onSaveClicked: EventEmitter<any> = new EventEmitter();
+  @Output() onDeleteClicked: EventEmitter<any> = new EventEmitter();
 
   editMode: boolean = false;
   selectedRow = null;
@@ -37,13 +40,12 @@ export class TableRowComponent implements OnInit {
   }
 
   deleteClickHandler() {
+    this.onDeleteClicked.emit(this.selectedRow);
   }
 
   saveClickHandler() {
-    /* this.dataService.updateEmployee(this.selectedRow).subscribe(data => {
-      console.log(data);
-      this.editMode = false;
-    }); */
+    this.onSaveClicked.emit(this.selectedRow);
+    this.editMode = false;
   }
 
   cancelClickHandler() {
