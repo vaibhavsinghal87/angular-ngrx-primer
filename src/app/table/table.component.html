@@ -1,10 +1,10 @@
-<table *ngIf="tableData.length">
+<table *ngIf="rows.length">
     <tr>
-        <th *ngFor="let item of employees?.headers">
+        <th *ngFor="let item of headers">
             {{item}}
         </th>
     </tr>
-    <tr *ngFor="let emp of tableData" app-table-row [empData]="emp" (onSaveClicked)="saveClicked($event)"
+    <tr *ngFor="let emp of rows" app-table-row [empData]="emp" (onSaveClicked)="saveClicked($event)"
         (onDeleteClicked)="deleteClicked()">
     </tr>
 </table>

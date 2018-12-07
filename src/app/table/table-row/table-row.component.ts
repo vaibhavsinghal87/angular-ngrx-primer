@@ -1,9 +1,5 @@
 import { Component, OnInit, Input, Output } from '@angular/core';
 
-import { DataService } from '../../data.service';
-
-import { Observable } from 'rxjs';
-import { of } from 'rxjs';
 import { EventEmitter } from '@angular/core';
 
 @Component({
@@ -13,26 +9,19 @@ import { EventEmitter } from '@angular/core';
 })
 export class TableRowComponent implements OnInit {
 
-  Object = Object;
-
   @Input() empData: any;
   @Output() onSaveClicked: EventEmitter<any> = new EventEmitter();
   @Output() onDeleteClicked: EventEmitter<any> = new EventEmitter();
 
+  keys: String[];
   editMode: boolean = false;
   selectedRow = null;
 
-  constructor(private dataService: DataService) { }
+  constructor() { }
 
-  ngOnInit() {
-    //this.empData = this.convertToArray();
+  ngOnInit() {  
+    this.keys = Object.keys(this.empData);
   }
-
-  /* convertToArray(): Array<any> {
-    let data: Array<any> = [];
-    this.empData = Object.keys(this.empData).map(item => data.push(this.empData[item]));
-    return data;
-  } */
 
   editClickHandler(row) {
     this.selectedRow = Object.assign({}, row);

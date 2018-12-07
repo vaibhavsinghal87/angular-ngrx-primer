@@ -1,11 +1,11 @@
 <ng-container *ngIf="!editMode">
-  <td *ngFor="let key of Object.keys(empData)">
+  <td *ngFor="let key of keys">
     <span>{{ empData[key] }}</span>
   </td>
 </ng-container>
 
 <ng-container *ngIf="editMode">
-  <td *ngFor="let key of Object.keys(selectedRow)">
+  <td *ngFor="let key of keys">
     <input type="text" [(ngModel)]="selectedRow[key]" />
   </td>
 </ng-container>

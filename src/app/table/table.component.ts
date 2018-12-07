@@ -9,27 +9,26 @@ import { DataService } from '../data.service';
 })
 export class TableComponent implements OnInit {
 
-  employees: any;
-  tableData: Array<any> = [];
+  rows: Object[] = [];
+  headers: String[];
 
   constructor(private dataService: DataService) { }
 
   ngOnInit() {
     this.dataService.getEmployees()
       .subscribe(data => {
-        this.employees = data;
-        this.tableData = this.employees.rowData;
+        this.rows = data.rows;
+        this.headers = data.headers;
       });
   }
 
   saveClicked(row) {
     this.dataService.updateEmployee(row).subscribe(data => {
-      this.tableData = data;
+      this.rows = data;
     });
   }
 
   deleteClicked() {
     console.log('delete clicked');
   }
-
 }
