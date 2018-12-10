@@ -15,7 +15,7 @@ export class TableRowComponent implements OnInit {
 
   keys: String[];
   editMode: boolean = false;
-  selectedRow = null;
+  selected = null;
 
   constructor() { }
 
@@ -23,23 +23,23 @@ export class TableRowComponent implements OnInit {
     this.keys = Object.keys(this.empData);
   }
 
-  editClickHandler(row) {
-    this.selectedRow = Object.assign({}, row);
+  editClickHandler() {
+    this.selected = Object.assign({}, this.empData);
     this.editMode = true;
   }
 
   deleteClickHandler() {
-    this.onDeleteClicked.emit(this.selectedRow);
+    this.onDeleteClicked.emit(this.selected);
   }
 
   saveClickHandler() {
-    this.onSaveClicked.emit(this.selectedRow);
+    this.onSaveClicked.emit(this.selected);
     this.editMode = false;
   }
 
   cancelClickHandler() {
+    this.selected = null;
     this.editMode = false;
-    this.selectedRow = null;
   }
 
 }
