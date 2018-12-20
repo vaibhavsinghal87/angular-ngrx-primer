@@ -1,0 +1,19 @@
+<div class="modal-header">
+  <h4 class="modal-title pull-left">{{title}}</h4>
+  <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  Are you sure you want to delete following employee?
+  <br>
+  <div>
+    <span>Emp ID: {{item.id}}</span><br>
+    <span>Name: {{item.fName}} {{item.lName}}</span><br>
+    <span>Project: {{item.project}}</span>
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-default" (click)="confirm()">Yes</button>
+  <button type="button" class="btn btn-default" (click)="decline()">No</button>
+</div>

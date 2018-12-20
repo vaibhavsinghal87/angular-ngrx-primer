@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
 import { DataService } from '../data.service';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
+import { DeleteEmployeeConfirmationModalComponent } from '../delete-employee-confirmation-modal/delete-employee-confirmation-modal.component';
 
 @Component({
   selector: 'app-table',
@@ -12,7 +15,9 @@ export class TableComponent implements OnInit {
   rows: Object[] = [];
   headers: String[];
 
-  constructor(private dataService: DataService) { }
+  modalRef: BsModalRef;
+
+  constructor(private dataService: DataService, private modalService: BsModalService) { }
 
   ngOnInit() {
     this.dataService.getEmployees()
@@ -28,7 +33,17 @@ export class TableComponent implements OnInit {
     });
   }
 
-  deleteClicked() {
-    console.log('delete clicked');
+  deleteClicked(row) {
+    let initialState = {
+      item: row
+    };
+    this.modalRef = this.modalService.show(DeleteEmployeeConfirmationModalComponent, { initialState });
+    this.modalRef.content.action.subscribe(result => {
+      if (result) {
+        this.dataService.delete(row.id).subscribe(data => {
+          this.rows = data;
+        });
+      }
+    });
   }
 }

@@ -24,7 +24,7 @@ export class DataService {
       );
   }
 
-  updateEmployee(emp) {
+  updateEmployee(emp): Observable<Object[]> {
     let len = this.employeeData.rows.length;
     for (let i = 0; i < len; i++) {
       let item = this.employeeData.rows[i] as any;
@@ -40,20 +40,19 @@ export class DataService {
     ); */
   }
 
+  delete(id: number): Observable<Object[]> {
+    this.employeeData.rows = this.employeeData.rows.filter(item => {
+      return item['id'] !== id;
+    });
+    return of(this.employeeData.rows);
+  }
+
   /* 
     getHero(id: number): Promise<Hero> {
       const url = `${this.heroesUrl}/${id}`;
       return this.http.get(url)
           .toPromise()
           .then(response => response.json().data as Hero)
-          .catch(this.handleError);
-    }
-  
-    delete(id: number): Promise<void> {
-      const url = `${this.heroesUrl}/${id}`;
-      return this.http.delete(url, { headers: this.headers })
-          .toPromise()
-          .then(() => null)
           .catch(this.handleError);
     }
   

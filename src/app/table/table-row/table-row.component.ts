@@ -19,7 +19,7 @@ export class TableRowComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {  
+  ngOnInit() {
     this.keys = Object.keys(this.empData);
   }
 
@@ -28,8 +28,8 @@ export class TableRowComponent implements OnInit {
     this.editMode = true;
   }
 
-  deleteClickHandler() {
-    this.onDeleteClicked.emit(this.selected);
+  deleteClickHandler(row) {
+    this.onDeleteClicked.emit(row);
   }
 
   saveClickHandler() {

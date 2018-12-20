@@ -12,19 +12,27 @@ import { DataService } from './data.service';
 import { TableComponent } from './table/table.component';
 import { TableRowComponent } from './table/table-row/table-row.component';
 
+import { ModalModule } from 'ngx-bootstrap';
+import { DeleteEmployeeConfirmationModalComponent } from './delete-employee-confirmation-modal/delete-employee-confirmation-modal.component';
+
 @NgModule({
   declarations: [
     AppComponent,
     TableComponent,
-    TableRowComponent
+    TableRowComponent,
+    DeleteEmployeeConfirmationModalComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService)
+    HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService),
+    ModalModule.forRoot()
   ],
   providers: [DataService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+    DeleteEmployeeConfirmationModalComponent
+  ]
 })
 export class AppModule { }

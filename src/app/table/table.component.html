@@ -5,6 +5,6 @@
         </th>
     </tr>
     <tr *ngFor="let emp of rows" app-table-row [empData]="emp" (onSaveClicked)="saveClicked($event)"
-        (onDeleteClicked)="deleteClicked()">
+        (onDeleteClicked)="deleteClicked($event)">
     </tr>
 </table>
