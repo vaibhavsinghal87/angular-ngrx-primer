@@ -4,12 +4,12 @@ import { BsModalRef } from 'ngx-bootstrap';
 @Component({
   selector: 'app-delete-employee-confirmation-modal',
   templateUrl: './delete-employee-confirmation-modal.component.html',
-  styleUrls: ['./delete-employee-confirmation-modal.component.css']
+  styleUrls: ['./delete-employee-confirmation-modal.component.scss']
 })
 export class DeleteEmployeeConfirmationModalComponent implements OnInit {
 
   @Output() action: EventEmitter<any> = new EventEmitter();
-  title: string = 'Delete Employee';
+  title: string = 'DELETE EMPLOYEE';
   item: any = {};
 
   constructor(public bsModalRef: BsModalRef) { }

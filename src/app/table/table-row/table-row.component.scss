@@ -7,28 +7,8 @@ td {
     }
 }
 
-.edit {
+button {
     margin-right: 8px;
-    background-color: #4eb5f1;
-    &:hover {
-        background-color: #4095c6;
-    }
-}
-
-.delete {
-    background-color: #dc3545;
-    &:hover {
-        background-color: #c82333;
-    }
-}
-
-
-.save {
-    margin-right: 8px;
-    background-color: #40c655;
-    &:hover {
-        background-color: #31b600;
-    }
 }
 
 .cancel {
