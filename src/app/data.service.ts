@@ -47,26 +47,9 @@ export class DataService {
     return of(this.employeeData.rows);
   }
 
-  /* 
-    getHero(id: number): Promise<Hero> {
-      const url = `${this.heroesUrl}/${id}`;
-      return this.http.get(url)
-          .toPromise()
-          .then(response => response.json().data as Hero)
-          .catch(this.handleError);
-    }
-  
-    create(name: string): Promise<Hero> {
-      return this.http
-          .post(this.heroesUrl, JSON.stringify({ name: name }), { headers: this.headers })
-          .toPromise()
-          .then(res => res.json().data as Hero)
-          .catch(this.handleError);
-    }
-  
-    private handleError(error: any): Promise<any> {
-      console.error('An error occurred', error); // for demo purposes only
-      return Promise.reject(error.message || error);
-    } */
+  addEmployee(emp) {
+    this.employeeData.rows.push(emp);
+    return of(this.employeeData.rows);
+  }
 }
 

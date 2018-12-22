@@ -46,4 +46,10 @@ export class TableComponent implements OnInit {
       }
     });
   }
+
+  addEmployee(emp) {
+    this.dataService.addEmployee(emp).subscribe(data => {
+      this.rows = data;
+    });
+  }
 }

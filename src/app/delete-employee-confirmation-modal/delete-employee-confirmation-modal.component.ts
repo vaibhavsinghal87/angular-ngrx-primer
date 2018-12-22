@@ -8,8 +8,9 @@ import { BsModalRef } from 'ngx-bootstrap';
 })
 export class DeleteEmployeeConfirmationModalComponent implements OnInit {
 
-  @Output() action: EventEmitter<any> = new EventEmitter();
   title: string = 'DELETE EMPLOYEE';
+  
+  @Output() action: EventEmitter<any> = new EventEmitter();
   item: any = {};
 
   constructor(public bsModalRef: BsModalRef) { }
