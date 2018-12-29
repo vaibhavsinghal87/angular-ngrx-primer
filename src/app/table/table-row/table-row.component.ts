@@ -1,6 +1,6 @@
-import { Component, OnInit, Input, Output } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
-import { EventEmitter } from '@angular/core';
+import { Employee } from '../../employee';
 
 @Component({
   selector: '[app-table-row]',
@@ -9,18 +9,16 @@ import { EventEmitter } from '@angular/core';
 })
 export class TableRowComponent implements OnInit {
 
-  @Input() empData: any;
+  @Input() empData: Employee;
   @Output() onSaveClicked: EventEmitter<any> = new EventEmitter();
   @Output() onDeleteClicked: EventEmitter<any> = new EventEmitter();
 
-  keys: String[];
   editMode: boolean = false;
   selected = null;
 
   constructor() { }
 
   ngOnInit() {
-    this.keys = Object.keys(this.empData);
   }
 
   editClickHandler() {
@@ -28,7 +26,7 @@ export class TableRowComponent implements OnInit {
     this.editMode = true;
   }
 
-  deleteClickHandler(row) {
+  deleteClickHandler(row: Employee) {
     this.onDeleteClicked.emit(row);
   }
 

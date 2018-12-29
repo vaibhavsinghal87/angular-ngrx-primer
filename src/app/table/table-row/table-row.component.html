@@ -1,8 +1,20 @@
 <ng-container *ngTemplateOutlet="editMode ? edit : display"></ng-container>
 
 <ng-template #display>
-  <td *ngFor="let key of keys">
-    <span>{{ empData[key] }}</span>
+  <td>
+    <span>{{ empData.id }}</span>
+  </td>
+  <td>
+    <span>{{ empData.empId }}</span>
+  </td>
+  <td>
+    <span>{{ empData.fName }}</span>
+  </td>
+  <td>
+    <span>{{ empData.lName }}</span>
+  </td>
+  <td>
+    <span>{{ empData.project }}</span>
   </td>
   <td>
     <div>
@@ -13,8 +25,20 @@
 </ng-template>
 
 <ng-template #edit>
-  <td *ngFor="let key of keys">
-    <input type="text" [(ngModel)]="selected[key]" />
+  <td>
+    <input type="text" [(ngModel)]="selected.id" />
+  </td>
+  <td>
+    <input type="text" [(ngModel)]="selected.empId" />
+  </td>
+  <td>
+    <input type="text" [(ngModel)]="selected.fName" />
+  </td>
+  <td>
+    <input type="text" [(ngModel)]="selected.lName" />
+  </td>
+  <td>
+    <input type="text" [(ngModel)]="selected.project" />
   </td>
   <td>
     <div>
