@@ -6,6 +6,10 @@ import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { DeleteEmployeeConfirmationModalComponent } from '../delete-employee-confirmation-modal/delete-employee-confirmation-modal.component';
 import { Employee } from '../employee';
 
+import { Store, select } from '@ngrx/store';
+import * as EmployeeActions from '../store/actions/employee.actions';
+import { Observable } from 'rxjs';
+
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
@@ -13,12 +17,13 @@ import { Employee } from '../employee';
 })
 export class TableComponent implements OnInit {
 
+  rows$: Observable<Employee[]>;
   rows: Employee[] = [];
   headers: String[];
 
   modalRef: BsModalRef;
 
-  constructor(private dataService: DataService, private modalService: BsModalService) { }
+  constructor(private dataService: DataService, private modalService: BsModalService, private store: Store<Employee[]>) { }
 
   ngOnInit() {
     // get table headers from inMemoryWebApi
@@ -26,40 +31,31 @@ export class TableComponent implements OnInit {
       .subscribe(response => {
         this.headers = response;
       });
-    // get table data from inMemoryWebApi
-    this.getEmployees();
+
+    // get table data
+    this.store.dispatch(new EmployeeActions.Fetch());
+
+    this.rows$ = this.store.pipe(select('employees'));
+    // this.rows$ = this.store.pipe(select(state => state.employees));
   }
 
-  getEmployees(): void {
-    this.dataService.getEmployees()
-      .subscribe(response => {
-        this.rows = response;
-      });
+  saveClicked(row: Employee) {
+    this.store.dispatch(new EmployeeActions.Update(row));
   }
 
-  saveClicked(row) {
-    this.dataService.updateEmployee(row).subscribe(response => {
-      this.getEmployees();
-    });
-  }
-
-  deleteClicked(row) {
+  deleteClicked(row: Employee) {
     let initialState = {
       item: row
     };
     this.modalRef = this.modalService.show(DeleteEmployeeConfirmationModalComponent, { initialState });
     this.modalRef.content.action.subscribe(result => {
       if (result) {
-        this.dataService.delete(row.id).subscribe(response => {
-          this.getEmployees();
-        });
+        this.store.dispatch(new EmployeeActions.Delete(row.id));
       }
     });
   }
 
-  addEmployee(emp) {
-    this.dataService.addEmployee(emp).subscribe(response => {
-      this.getEmployees();
-    });
+  addEmployee(emp: Employee) {
+    this.store.dispatch(new EmployeeActions.Add(emp));
   }
 }

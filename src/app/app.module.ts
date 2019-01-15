@@ -16,6 +16,12 @@ import { ModalModule } from 'ngx-bootstrap';
 import { DeleteEmployeeConfirmationModalComponent } from './delete-employee-confirmation-modal/delete-employee-confirmation-modal.component';
 import { AddEmployeeModalComponent } from './add-employee-modal/add-employee-modal.component';
 
+import { StoreModule } from '@ngrx/store';
+import { employeeReducer } from './store/reducers/employee.reducers';
+
+import { EffectsModule } from '@ngrx/effects';
+import { EmployeeEffects } from './store/effects/employee.effects';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,7 +36,9 @@ import { AddEmployeeModalComponent } from './add-employee-modal/add-employee-mod
     ReactiveFormsModule,
     HttpClientModule,
     HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService),
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    StoreModule.forRoot({ employees: employeeReducer }),
+    EffectsModule.forRoot([EmployeeEffects])
   ],
   providers: [DataService],
   bootstrap: [AppComponent],
